@@ -1,18 +1,46 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-container>
+      <b-row>
+        <b-col>
+          <button @click="askRecord">Record</button>
+          <button @click="stopRecord">Stop</button>
+        </b-col>
+        
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import AudioService from '@/services/audio.js';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
+  },
+  data() {
+    return {
+      audioService: null,
+    }
+  },
+  created() {
+    this.audioService = new AudioService(location.origin.replace(/^http/, 'ws'));
+  },
+  methods: {
+    async askRecord() {
+      try {
+        let devices = await navigator.mediaDevices.getUserMedia({ audio: true });
+        await this.audioService.startRecording(devices);
+      } catch (err) {
+        console.error(err);
+      }
+      
+    },
+
+    stopRecord() {
+      this.audioService.stopRecording();
+    }
   },
 };
 </script>
