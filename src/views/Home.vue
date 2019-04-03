@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import AudioService from '@/services/audio.js';
+import AudioService from '@/services/AudioService.js';
+import SocketService from '@/services/SocketService.js';
 
 export default {
   name: 'home',
@@ -26,6 +27,9 @@ export default {
   },
   created() {
     this.audioService = new AudioService(location.origin.replace(/^http/, 'ws'));
+  },
+  mounted() {
+    let ss = new SocketService('http://localhost:8081');
   },
   methods: {
     async askRecord() {

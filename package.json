@@ -13,6 +13,7 @@
     "bootstrap-vue": "^2.0.0-rc.14",
     "pdfjs": "^2.1.0",
     "register-service-worker": "^1.6.2",
+    "socket.io-client": "^2.2.0",
     "vue": "^2.6.6",
     "vue-pdf": "^4.0.6",
     "vue-router": "^3.0.1",
@@ -32,6 +33,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.5.21",
+    "worklet-loader": "^1.0.0"
   }
 }
