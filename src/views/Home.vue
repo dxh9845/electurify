@@ -6,36 +6,53 @@
           <button @click="askRecord">Record</button>
           <button @click="stopRecord">Stop</button>
         </b-col>
-        
+
       </b-row>
+      <b-row>
+        {{ connected }}
+      </b-row>
+      <transcript-box>
+
+      </transcript-box>
     </b-container>
   </div>
 </template>
 
 <script>
-import AudioService from '@/services/AudioService.js';
-import SocketService from '@/services/SocketService.js';
+import ScriptProcessor from '@/services/ScriptProcessor.js';
+import TranscriptBox from '@/components/Transcript/TranscriptBox.vue';
 
 export default {
   name: 'home',
   components: {
+    TranscriptBox
   },
   data() {
     return {
+      connected: false,
       audioService: null,
     }
   },
-  created() {
-    this.audioService = new AudioService(location.origin.replace(/^http/, 'ws'));
+  sockets: {
+    connect: function() {
+      console.log("Socket connected");
+      this.connected = true;
+    },
+    disconnect: function() {
+      this.connected = false;
+    },
+    messages: function(data) {
+      console.log(data);
+    }
   },
   mounted() {
-    let ss = new SocketService('http://localhost:8081');
+    // Manage the browser recording with our wrapper class
+    // this.scriptProcessor = new ScriptProcessor(this.$socket);
   },
   methods: {
     async askRecord() {
       try {
-        let devices = await navigator.mediaDevices.getUserMedia({ audio: true });
-        await this.audioService.startRecording(devices);
+        // await this.scriptProcessor.startRecording();
       } catch (err) {
         console.error(err);
       }
@@ -43,7 +60,7 @@ export default {
     },
 
     stopRecord() {
-      this.audioService.stopRecording();
+      // this.scriptProcessor.stopRecording();
     }
   },
 };
