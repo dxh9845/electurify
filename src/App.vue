@@ -1,22 +1,36 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" class='d-flex flex-column h-100'>
+    <b-navbar type="dark" variant="coral">
+      <b-navbar-brand>Lecture Accessibility</b-navbar-brand>
+      <b-navbar-nav class="ml-auto">
+          <b-btn variant="light" size="sm" class="my-sm-0">
+            Start Recording
+          </b-btn>
+      </b-navbar-nav>
+    </b-navbar>
+    <b-container fluid class='flex-grow-1'>
+      <b-row class='h-100'>
+        <b-col class='h-100'>
+          <router-view />
+        </b-col>
+        <router-view name='sidebar' />
+      </b-row>
+    </b-container>
   </div>
 </template>
 
-<style lang="scss">
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import SideNavbar from '@/components/Navigation/SideNavbar.vue';
+export default {
+  components: {
+    SideNavbar
   }
+}
+</script>
+
+<style lang="scss">
+
+.fill {
+  flex-grow: 1;
 }
 </style>

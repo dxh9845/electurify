@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import './plugins/font-awesome';
 import './plugins/bootstrap-vue';
 import VueSocketIO from 'vue-socket.io';
 import App from './App.vue';
