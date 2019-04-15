@@ -1,5 +1,6 @@
 <template>
   <div>
+    <b-btn size='sm' @click="sendNLPRequest">Tell me more</b-btn>
     <wiki-summary></wiki-summary>
   </div>
 </template>
@@ -12,5 +13,10 @@ export default {
   components: {
     WikiSummary,
   },
+  methods: {
+    sendNLPRequest() {
+      this.$socket.emit('get-nlp')
+    }
+  }
 };
 </script>
