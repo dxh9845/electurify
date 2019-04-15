@@ -1,12 +1,16 @@
 <template>
-    <div>
-        <p>ABC</p>
-    </div>
+  <div>
+    <wiki-summary></wiki-summary>
+  </div>
 </template>
 
 <script>
-export default {
-    name: 'knowledge-panel',
-}
-</script>
+import WikiSummary from './WikiSummary.vue';
 
+export default {
+  name: 'knowledge-panel',
+  components: {
+    WikiSummary,
+  },
+};
+</script>
