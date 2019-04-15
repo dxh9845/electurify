@@ -9,7 +9,10 @@
         </b-row>
         <b-row>
             <b-col>
-                <div class='w-100 bg-dark text-white transcript'> > {{ interimText }}</div>
+                <div class='w-100 bg-dark text-white transcript'> 
+                    <span class='ml-3'> > </span> 
+                    {{ interimText }}
+                </div>
             </b-col>
         </b-row>
     </b-container>

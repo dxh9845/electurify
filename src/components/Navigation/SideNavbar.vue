@@ -1,17 +1,33 @@
 <template>
     <div class='side-nav d-inline-flex h-100'>
-        <div class='d-inline-flex flex-column justify-content-between h-100 icon-bar'>
+        <div class='d-inline-flex flex-column justify-content-between h-100 bg-light icon-bar'>
             <b-list-group>
-                <b-list-group-item @click="toggle(false)" to="/knowledge" class='rounded-0' :class="classutils.center" tag="button">
+                <b-list-group-item 
+                    @click="toggle(false)" 
+                    role='button' title='Knowledge panel'
+                    v-b-tooltip.hover.left="'Knowledge panel'"
+                    to="/knowledge" class='rounded-0' 
+                    :class="classutils.center" tag="button"
+                    aria-label='Activate knowledge panel'>
                     <fa-icon icon='brain'></fa-icon>
                 </b-list-group-item>
             </b-list-group>
 
             <b-list-group>
-                <b-list-group-item @click="toggle(false)" to="/settings" class='rounded-0' :class="classutils.center" tag="button">
+                <b-list-group-item 
+                    @click="toggle(false)" 
+                    to="/settings" class='rounded-0' 
+                    role='button' title='Settings panel'
+                    v-b-tooltip.hover.left="'Settings panel'"
+                    :class="classutils.center" tag="button"
+                    aria-label='Activate settings panel'>
                     <fa-icon icon='cog'></fa-icon>
                 </b-list-group-item>
-                <b-list-group-item @click="toggle(true)" class='rounded-0' :class="classutils.center" tag="button">
+                <b-list-group-item 
+                    @click="toggle(true)" class='rounded-0'
+                    role='button' title='Collapse sidebar'
+                    :class="classutils.center" tag="button"
+                    aria-label='Collapse sidebar'>
                     <fa-icon :flip="iconDirection" icon='angle-double-right'></fa-icon>
                 </b-list-group-item>
             </b-list-group>
@@ -54,12 +70,14 @@ export default {
          * @param isCollapseButton {Boolean} - Whether the button clicked was the collapse button.
          */
         toggle(isCollapseButton) {
+            // If the button is the "collapse button", invert whatever value it has
             if (isCollapseButton) {
                 this.collapsed = !this.collapsed;
-            } else if (this.collapsed) {
+            } 
+            // If this button is collapsed, expand it 
+            else if (this.collapsed) {
                 this.collapsed = false;
             }
-            
         }
     }
 
@@ -74,9 +92,8 @@ export default {
 }
 
 .icon-bar {
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
     width: 50px;
-    background-color: #ececec;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
 }
 </style>
