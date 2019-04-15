@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import './plugins/font-awesome';
 import './plugins/bootstrap-vue';
+import VueChatScroll from 'vue-chat-scroll';
 import VueSocketIO from 'vue-socket.io';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import './registerServiceWorker';
+
+Vue.use(VueChatScroll);
 
 Vue.use(new VueSocketIO({
   debug: true,

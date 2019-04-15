@@ -2,16 +2,16 @@
     <div class='side-nav d-inline-flex h-100'>
         <div class='d-inline-flex flex-column justify-content-between h-100 icon-bar'>
             <b-list-group>
-                <b-list-group-item to="/knowledge" class='rounded-0' :class="classutils.center" tag="button">
+                <b-list-group-item @click="toggle(false)" to="/knowledge" class='rounded-0' :class="classutils.center" tag="button">
                     <fa-icon icon='brain'></fa-icon>
                 </b-list-group-item>
             </b-list-group>
 
             <b-list-group>
-                <b-list-group-item to="/settings" class='rounded-0' :class="classutils.center" tag="button">
+                <b-list-group-item @click="toggle(false)" to="/settings" class='rounded-0' :class="classutils.center" tag="button">
                     <fa-icon icon='cog'></fa-icon>
                 </b-list-group-item>
-                <b-list-group-item @click="toggle" class='rounded-0' :class="classutils.center" tag="button">
+                <b-list-group-item @click="toggle(true)" class='rounded-0' :class="classutils.center" tag="button">
                     <fa-icon :flip="iconDirection" icon='angle-double-right'></fa-icon>
                 </b-list-group-item>
             </b-list-group>
@@ -51,9 +51,15 @@ export default {
     methods: {
         /**
          * Toggle the navigation pane.
+         * @param isCollapseButton {Boolean} - Whether the button clicked was the collapse button.
          */
-        toggle() {
-            this.collapsed = !this.collapsed;
+        toggle(isCollapseButton) {
+            if (isCollapseButton) {
+                this.collapsed = !this.collapsed;
+            } else if (this.collapsed) {
+                this.collapsed = false;
+            }
+            
         }
     }
 

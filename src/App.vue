@@ -3,14 +3,12 @@
     <b-navbar type="dark" variant="coral">
       <b-navbar-brand>Lecture Accessibility</b-navbar-brand>
       <b-navbar-nav class="ml-auto">
-          <b-btn variant="light" size="sm" class="my-sm-0">
-            Start Recording
-          </b-btn>
+        <RecordButton />
       </b-navbar-nav>
     </b-navbar>
     <b-container fluid class='flex-grow-1'>
       <b-row class='h-100'>
-        <b-col class='h-100'>
+        <b-col class='h-100 p-4'>
           <router-view />
         </b-col>
         <router-view name='sidebar' />
@@ -20,11 +18,12 @@
 </template>
 
 <script>
-import SideNavbar from '@/components/Navigation/SideNavbar.vue';
+import RecordButton from '@/components/Common/RecordButton.vue';
+
 export default {
   components: {
-    SideNavbar
-  }
+    RecordButton
+  },
 }
 </script>
 
