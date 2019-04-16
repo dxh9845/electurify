@@ -27,6 +27,7 @@ export default class ScriptProcessor {
      */
     constructor(socketService, bufferSize = 2048) {
       this.bufferSize = bufferSize;
+      this.buffArray = [];
 
       this.constructAudioContext = this.constructAudioContext.bind(this);
       this.float32ToInt16 = this.float32ToInt16.bind(this);
@@ -34,6 +35,7 @@ export default class ScriptProcessor {
       this.stopRecording = this.stopRecording.bind(this);
       this.sendAudio = this.sendAudio.bind(this);
       this.downsampleBuffer = this.downsampleBuffer.bind(this);
+
 
       // Open our websocket
       this.socketService = socketService;
@@ -123,6 +125,16 @@ export default class ScriptProcessor {
         console.log(`ERROR unable to close media stream: ${err}`); // triggers on Firefox
       }
 
+      const soundBlob = new Blob(this.buffArray);
+      console.log(soundBlob);
+      const audioUrl = URL.createObjectURL(soundBlob);
+      console.log(audioUrl);
+      const audio = new Audio(audioUrl);
+      console.log(audio);
+      try {
+        audio.play();
+      } catch (e) { console.error(e); }
+
       // Now close our context
       await this.context.close();
       // Reset these variables
@@ -144,23 +156,10 @@ export default class ScriptProcessor {
       // console.log(downsample);
       const downsampledBuffer = this.downsampleBuffer(inputData, 44100, 16000);
 
-      // for (let sample = 0; sample < inputBuffer.length; sample++) {
-      //   outputData[sample] = inputBuffer[sample];
-      // }
-
+      this.buffArray.push(downsampledBuffer);
 
       // this.socketService.streamAudio(downsampledBuffer);
       this.socketService.emit(AUDIO_CHANGE, downsampledBuffer);
-    }
-
-    float32ToInt16(buffer) {
-      let l = buffer.length;
-      const buf = new Int16Array(l);
-
-      while (l--) {
-        buf[l] = buffer[l] * 0xFFFF; // convert to 16 bit
-      }
-      return buf.buffer;
     }
 
     // eslint-disable-next-line class-methods-use-this

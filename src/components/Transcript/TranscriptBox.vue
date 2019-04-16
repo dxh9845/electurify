@@ -9,8 +9,8 @@
         </b-row>
         <b-row>
             <b-col>
-                <div class='w-100 bg-dark text-white transcript'> 
-                    <span class='ml-3'> > </span> 
+                <div class='w-100 bg-dark text-white transcript'>
+                    <span class='ml-3'> > </span>
                     {{ interimText }}
                 </div>
             </b-col>
@@ -20,25 +20,25 @@
 
 <script>
 export default {
-    name: 'transcript-box',
-    sockets: {
-        textSend: function({ results }) {
-            if (results[0] && results[0].isFinal) {
-                // This is a "finalized transcription" - add it to the final text
-                this.finalText.push(`${results[0].alternatives[0].transcript}.`)
-                this.interimText = ""
-            } else {
-                this.interimText = results[0].alternatives[0].transcript;
-            }
-        }
+  name: 'transcript-box',
+  sockets: {
+    textSend({ results }) {
+      if (results[0] && results[0].isFinal) {
+        // This is a "finalized transcription" - add it to the final text
+        this.finalText.push(`${results[0].alternatives[0].transcript}.`);
+        this.interimText = '';
+      } else {
+        this.interimText = results[0].alternatives[0].transcript;
+      }
     },
-    data() { 
-        return {
-            finalText: [],
-            interimText: "", 
-        }
-    }
-}
+  },
+  data() {
+    return {
+      finalText: [],
+      interimText: '',
+    };
+  },
+};
 </script>
 
 <style lang="scss">
@@ -49,7 +49,7 @@ export default {
     list-style-type: none;
 }
 
-.transcript { 
+.transcript {
     font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
 }

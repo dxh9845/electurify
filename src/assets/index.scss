@@ -1,0 +1,12 @@
+@import './colors.scss';
+
+.content-column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.scroll-container {
+    overflow-y: auto;
+    flex-grow: 1;
+}

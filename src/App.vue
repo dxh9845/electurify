@@ -1,19 +1,19 @@
 <template>
-  <div id="app" class='d-flex flex-column h-100'>
+  <div id="app">
+
+    <!-- Take up a small amount of space at the top -->
     <b-navbar type="dark" variant="coral">
       <b-navbar-brand>Lecture Accessibility</b-navbar-brand>
       <b-navbar-nav class="ml-auto">
         <RecordButton />
       </b-navbar-nav>
     </b-navbar>
-    <b-container fluid class='flex-grow-1'>
-      <b-row class='h-100'>
-        <b-col class='h-100 p-4'>
-          <router-view />
-        </b-col>
-        <router-view name='sidebar' />
-      </b-row>
-    </b-container>
+
+    <div class='d-flex overflow-hidden h-100'>
+      <router-view class='p-4 content-column' />
+      <router-view name='sidebar' />
+    </div>
+
   </div>
 </template>
 
@@ -22,12 +22,18 @@ import RecordButton from '@/components/Common/RecordButton.vue';
 
 export default {
   components: {
-    RecordButton
+    RecordButton,
   },
-}
+};
 </script>
 
 <style lang="scss">
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 
 .fill {
   flex-grow: 1;

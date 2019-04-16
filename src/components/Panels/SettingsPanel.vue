@@ -21,11 +21,9 @@
 import SectionIcon from '@/components/Common/SectionIcon.vue';
 
 export default {
-    name: 'settings-panel',
-    components: {
-        SectionIcon
-    }
-}
+  name: 'settings-panel',
+  components: {
+    SectionIcon,
+  },
+};
 </script>
-
-

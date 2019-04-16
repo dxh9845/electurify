@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div id="home" class='scroll-container'>
     <TranscriptBox></TranscriptBox>
   </div>
 </template>
@@ -10,32 +10,25 @@ import TranscriptBox from '@/components/Transcript/TranscriptBox.vue';
 export default {
   name: 'home',
   components: {
-    TranscriptBox
+    TranscriptBox,
   },
   data() {
     return {
       connected: false,
       audioService: null,
-    }
+    };
   },
   sockets: {
-    connect: function() {
-      console.log("Socket connected");
+    connect() {
+      console.log('Socket connected');
       this.connected = true;
     },
-    disconnect: function() {
+    disconnect() {
       this.connected = false;
     },
-    messages: function(data) {
+    messages(data) {
       console.log(data);
-    }
+    },
   },
 };
 </script>
-
-<style>
-.transcript-row {
-  height: 350px;
-}
-</style>
-
