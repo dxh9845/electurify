@@ -1,5 +1,5 @@
 import APIService from '@/services/APIService.js';
-import { LOAD_CONTEXT } from './actions.type';
+import { LOAD_CONTEXT, UPDATE_CONTEXT, DELETE_PHRASE } from './actions.type';
 import { SET_CONTEXT, SET_CONTEXT_ERROR } from './mutations.type';
 
 const state = {
@@ -19,6 +19,23 @@ const actions = {
       commit(SET_CONTEXT, phrases);
     } catch (err) {
       commit(SET_CONTEXT_ERROR, 'Failed to retrieve context.');
+    }
+  },
+  async [UPDATE_CONTEXT]({ state, commit }, newPhrases) {
+    try {
+      console.log(newPhrases);
+      const { phrases } = await state.apiService.putContext({ phrases: newPhrases });
+      commit(SET_CONTEXT, phrases);
+    } catch (err) {
+      commit(SET_CONTEXT_ERROR, 'Failed to add to the context.');
+    }
+  },
+  async [DELETE_PHRASE]({ state, commit, dispatch }, index) {
+    try {
+      const { phrases } = await state.apiService.deleteContext({ index });
+      commit(SET_CONTEXT, phrases);
+    } catch (err) {
+      commit(SET_CONTEXT_ERROR, 'Failed to delete context');
     }
   },
 };

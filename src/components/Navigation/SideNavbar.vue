@@ -33,8 +33,7 @@
             </b-list-group>
         </div>
 
-        <section id='side-container' class='scroll-container'
-            :class='sidebarWidth' v-if="!collapsed">
+        <section id='side-container' class='scroll-container' v-if="!collapsed">
             <router-view></router-view>
         </section>
     </nav>
@@ -71,6 +70,8 @@ export default {
          * @param isCollapseButton {Boolean} - Whether the button clicked was the collapse button.
          */
     toggle(isCollapseButton) {
+        console.log(`This is ${isCollapseButton ? '' : 'not' } the collapse button`)
+        console.log(`This sidepanel is ${this.collapsed ? 'collapsed' : 'not collapsed'}`)
       // If the button is the "collapse button", invert whatever value it has
       if (isCollapseButton) {
         this.collapsed = !this.collapsed;

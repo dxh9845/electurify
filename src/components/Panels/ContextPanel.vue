@@ -11,14 +11,21 @@
                 label-for='context-input'
                 description="Words and phrases are accepted!">
                 <b-input-group>
-                    <b-input type='text' id='context-input'></b-input>
+                    <b-input type='text' id='context-input' v-model='tempPhrase'></b-input>
                     <b-input-group-append>
-                        <b-btn size='sm' v-model='tempPhrase' @click='addToPhraseList'>Submit</b-btn>
+                        <b-btn size='sm' variant='primary' @click='addToPhraseList'>Add</b-btn>
                     </b-input-group-append>
                 </b-input-group>
             </b-form-group>
+            <b-alert dismissible  v-if='contextError'>
+              <p>{{ contextError }}</p>
+              <!-- <b-progress variant='danger' :max= -->
+              </b-alert>
             <b-list-group>
-                <b-list-group-item :key="index" v-for="(phrase, index) in phraseList">{{ phrase }}</b-list-group-item>
+                <b-list-group-item class='d-flex justify-content-between' :key="index" v-for="(phrase, index) in phraseList">
+                  {{ phrase }} 
+                  <b-btn size='sm' variant='danger' @click='deletePhrase(index)'>Delete</b-btn>
+                </b-list-group-item>
             </b-list-group>
         </section>
     </div>
@@ -26,7 +33,7 @@
 
 <script>
 import SectionIcon from '@/components/Common/SectionIcon.vue';
-import { LOAD_CONTEXT } from '@/store/actions.type.js';
+import { LOAD_CONTEXT, UPDATE_CONTEXT, DELETE_PHRASE } from '@/store/actions.type.js';
 import { mapState } from 'vuex';
 
 export default {
@@ -36,6 +43,7 @@ export default {
   },
   data() {
     return {
+      errorDismiss: null,
       tempPhrase: '',
     };
   },
@@ -43,14 +51,19 @@ export default {
     this.$store.dispatch(LOAD_CONTEXT);
   },
   computed: {
-    ...mapState({ phraseList: state => state.context.phraseList }),
+    ...mapState({ 
+      phraseList: state => state.context.phraseList, 
+      contextError: state => state.context.errorMessage,
+    }),
   },
   methods: {
     addToPhraseList() {
-      console.log(this.tempPhraseList);
-      this.tempPhraseList.push(this.tempPhrase);
+      this.$store.dispatch(UPDATE_CONTEXT, [...this.phraseList, this.tempPhrase])
       this.tempPhrase = '';
     },
+    deletePhrase(indexOfPhrase) {
+      this.$store.dispatch(DELETE_PHRASE, indexOfPhrase)
+    }
   },
 };
 </script>

@@ -25,7 +25,7 @@ export default {
     textSend({ results }) {
       if (results[0] && results[0].isFinal) {
         // This is a "finalized transcription" - add it to the final text
-        this.finalText.push(`${results[0].alternatives[0].transcript}.`);
+        this.finalText.push(`${results[0].alternatives[0].transcript}`);
         this.interimText = '';
       } else {
         this.interimText = results[0].alternatives[0].transcript;
