@@ -15,8 +15,8 @@ export default {
   },
   methods: {
     sendNLPRequest() {
-      this.$socket.emit('get-nlp')
-    }
-  }
+      this.$socket.emit('get-nlp');
+    },
+  },
 };
 </script>

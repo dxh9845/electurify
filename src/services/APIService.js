@@ -27,10 +27,15 @@ export default class APIService {
     }
 
     /**
-     * Put context
+     * Put context and update.
      */
     async putContext({ phrases }) {
       const response = await this.instance.put('/context', { phrases });
+      return response.data;
+    }
+
+    async deleteContext({ index }) {
+      const response = await this.instance.delete('/context', { index });
       return response.data;
     }
 }
