@@ -12,7 +12,8 @@ Vue.use(VueChatScroll);
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:8081/',
+  // connection: 'http://localhost:8081/',
+  connection: 'https://young-falls-51586.herokuapp.com',
   vuex: {
     store,
     actionPrefix: 'SOCKET_',

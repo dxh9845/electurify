@@ -30,7 +30,6 @@ export default class ScriptProcessor {
       this.buffArray = [];
 
       this.constructAudioContext = this.constructAudioContext.bind(this);
-      this.float32ToInt16 = this.float32ToInt16.bind(this);
       this.startRecording = this.startRecording.bind(this);
       this.stopRecording = this.stopRecording.bind(this);
       this.sendAudio = this.sendAudio.bind(this);
