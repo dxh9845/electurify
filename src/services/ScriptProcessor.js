@@ -1,7 +1,7 @@
 
 import {
-  AUDIO_CHANGE, START_STREAM, END_STREAM,
-} from '../utils/events.types';
+  AUDIO_DATA, START_STREAM, END_STREAM, MESSAGES, BROAD,
+} from '../utils/message.types';
 
 export default class ScriptProcessor {
   audioContext;
@@ -109,9 +109,7 @@ export default class ScriptProcessor {
     // We have stopped the socket
     this.recording = false;
 
-    // const {
-    //   socketService, mediaStream, scriptProcessor, context,
-    // } = this;
+
     this.socketService.emit(END_STREAM);
     try {
       // Stop the stream
@@ -123,16 +121,6 @@ export default class ScriptProcessor {
     } catch (err) {
       console.log(`ERROR unable to close media stream: ${err}`); // triggers on Firefox
     }
-
-    const soundBlob = new Blob(this.buffArray);
-    console.log(soundBlob);
-    const audioUrl = URL.createObjectURL(soundBlob);
-    console.log(audioUrl);
-    const audio = new Audio(audioUrl);
-    console.log(audio);
-    try {
-      audio.play();
-    } catch (e) { console.error(e); }
 
     // Now close our context
     await this.context.close();
@@ -149,16 +137,13 @@ export default class ScriptProcessor {
   sendAudio({ inputBuffer, outputBuffer }) {
     const inputData = inputBuffer.getChannelData(0);
 
-    // UNCOMMENT if you want to hear the output
-    // const outputData = outputBuffer.getChannelData(0);
-    // const downsample = this.float32ToInt16(inputData);
-    // console.log(downsample);
+    // for (let b = inputData.length, d = new Int16Array(b); b--;) {
+    //   d[b] = 32767 * Math.min(1, inputData[b]);
+    // }
+
     const downsampledBuffer = this.downsampleBuffer(inputData, 44100, 16000);
 
-    this.buffArray.push(downsampledBuffer);
-
-    // this.socketService.streamAudio(downsampledBuffer);
-    this.socketService.emit(AUDIO_CHANGE, downsampledBuffer);
+    this.socketService.emit(AUDIO_DATA, downsampledBuffer);
   }
 
   // eslint-disable-next-line class-methods-use-this

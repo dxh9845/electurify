@@ -36,7 +36,6 @@ export default {
   },
   data() {
     return {
-      connected: false,
       audioService: null,
       newLecture: '',
       lectureCode: '',
@@ -46,10 +45,9 @@ export default {
   sockets: {
     connect() {
       console.log('Socket connected');
-      this.connected = true;
     },
     disconnect() {
-      this.connected = false;
+      console.log('Socket disconnected');
     },
     messages(data) {
       console.log(data);
@@ -62,13 +60,13 @@ export default {
         charset: 'alphabet',
         capitalization: 'uppercase',
       });
-      this.newLecture = newLectureCode
+      this.newLecture = newLectureCode;
       this.$socket.emit('new-lecture', newLectureCode);
     },
     joinLectureRoom() {
       this.$socket.emit('join-lecture', this.lectureCode);
-      joinConfirmation = `Joined this.lectureCode`;
-    }
-  }
+      joinConfirmation = 'Joined this.lectureCode';
+    },
+  },
 };
 </script>

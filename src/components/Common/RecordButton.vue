@@ -41,7 +41,6 @@ export default {
     },
     async askRecording() {
       try {
-        console.log('Ssdssad');
         await this.sp.startRecording();
       } catch (error) {
         console.error('Failed to start recording.');

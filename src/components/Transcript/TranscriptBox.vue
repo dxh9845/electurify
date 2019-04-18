@@ -2,7 +2,7 @@
     <b-container fluid>
         <b-row>
             <b-col>
-                <ul class='transcript-container mb-0' v-chat-scroll>
+                <ul class='transcript-container mb-0' :class='{ animated : connected, stopped: !connected }' v-chat-scroll>
                     <li class='transcript' v-for="message in finalText">{{ message }}</li>
                 </ul>
             </b-col>
@@ -15,10 +15,13 @@
                 </div>
             </b-col>
         </b-row>
+        <b-row>{{ connected }}</b-row>
     </b-container>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'transcript-box',
   sockets: {
@@ -38,6 +41,9 @@ export default {
       interimText: '',
     };
   },
+  computed: {
+    ...mapState({ connected: state => state.socket.connected }),
+  },
 };
 </script>
 
@@ -45,7 +51,13 @@ export default {
 .transcript-container {
     overflow-x: auto;
     height: 350px;
-    border: 2px solid black;
+    border: 2px solid transparent;
+    background-image:
+        linear-gradient(white, white),
+        linear-gradient(270deg, #00D7B9, #B95DD7 50%, #FFB367 100%);
+
+      background-repeat: no-repeat;
+      background-origin: padding-box, border-box;
     list-style-type: none;
 }
 
@@ -53,5 +65,27 @@ export default {
     font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
 }
+
+.stopped {
+  border: 2px solid black;
+}
+
+.animated {
+    background-image:
+      linear-gradient(white, white),
+      linear-gradient(180deg, cornflowerblue, purple 50%, cornflowerblue);
+
+    background-repeat: no-repeat;
+    background-size: 100% 100%, 100% 200%;
+    background-position: 0 0, 0 100%;
+    background-origin: padding-box, border-box;
+    animation: highlight 10s infinite alternate;
+  }
+
+  @keyframes highlight {
+    100% {
+      background-position: 0 0, 0 0;
+    }
+  }
 
 </style>
