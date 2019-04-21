@@ -12,3 +12,7 @@ export const TEXT_SEND = 'textSend';
 // NLP
 export const GET_NLP = 'getNlp';
 export const TOPIC_SEND = 'topicSend';
+
+// Lectures
+export const NEW_LECTURE = 'newLecture';
+export const JOIN_LECTURE = 'joinLecture';

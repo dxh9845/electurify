@@ -16,6 +16,10 @@ export default class APIService {
 
       this.getContext = this.getContext.bind(this);
       this.putContext = this.putContext.bind(this);
+      this.deleteContext = this.deleteContext.bind(this);
+
+      this.createRoom = this.createRoom.bind(this);
+      this.joinRoom = this.joinRoom.bind(this);
     }
 
     /**
@@ -34,8 +38,23 @@ export default class APIService {
       return response.data;
     }
 
+    /**
+     * Delete from the context body
+     * @param {Body} param0
+     */
     async deleteContext({ index }) {
       const response = await this.instance.delete('/context', { index });
+      return response.data;
+    }
+
+
+    async createRoom({ roomId }) {
+      const response = await this.instance.get('/room/create', { params: { roomId } });
+      return response.data;
+    }
+
+    async joinRoom({ roomId }) {
+      const response = await this.instance.get('/room/join', { params: { roomId } });
       return response.data;
     }
 }

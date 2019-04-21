@@ -27,6 +27,8 @@
 
 <script>
 import TranscriptBox from '@/components/Transcript/TranscriptBox.vue';
+import APIService from '@/services/APIService.js';
+import Socket from 'socket.io-client';
 import randomstring from 'randomstring';
 
 export default {
@@ -42,30 +44,35 @@ export default {
       joinConfirmation: '',
     };
   },
-  sockets: {
-    connect() {
-      console.log('Socket connected');
-    },
-    disconnect() {
-      console.log('Socket disconnected');
-    },
-    messages(data) {
-      console.log(data);
-    },
-  },
+  // sockets: {
+  //   connect() {
+  //     console.log('Socket connected');
+  //   },
+  //   disconnect() {
+  //     console.log('Socket disconnected');
+  //   },
+  //   messages(data) {
+  //     console.log(data);
+  //   },
+  // },
   methods: {
-    createLectureRoom() {
+    async createLectureRoom() {
       const newLectureCode = randomstring.generate({
         length: 5,
         charset: 'alphabet',
         capitalization: 'uppercase',
       });
       this.newLecture = newLectureCode;
-      this.$socket.emit('new-lecture', newLectureCode);
+      const res = await new APIService().createRoom({ roomId: newLectureCode });
+      console.log(res);
+      
+      // this.$socket.emit('newLecture', newLectureCode);
     },
-    joinLectureRoom() {
-      this.$socket.emit('join-lecture', this.lectureCode);
-      joinConfirmation = 'Joined this.lectureCode';
+    async joinLectureRoom() {
+      const res = await new APIService().joinRoom({ roomId: this.lectureCode })
+      console.log(res);
+      // this.$socket.emit('joinLecture', this.lectureCode);
+      this.joinConfirmation = `Joined ${this.lectureCode}`;
     },
   },
 };
