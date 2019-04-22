@@ -23,7 +23,7 @@
               </b-alert>
             <b-list-group>
                 <b-list-group-item class='d-flex justify-content-between' :key="index" v-for="(phrase, index) in phraseList">
-                  {{ phrase }} 
+                  {{ phrase }}
                   <b-btn size='sm' variant='danger' @click='deletePhrase(index)'>Delete</b-btn>
                 </b-list-group-item>
             </b-list-group>
@@ -48,21 +48,27 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch(LOAD_CONTEXT);
+    // this.$store.dispatch(LOAD_CONTEXT);
   },
   computed: {
-    ...mapState({ 
-      phraseList: state => state.context.phraseList, 
+    ...mapState({
+      phraseList: state => state.context.phraseList,
       contextError: state => state.context.errorMessage,
     }),
   },
   methods: {
     addToPhraseList() {
-      this.$store.dispatch(UPDATE_CONTEXT, [...this.phraseList, this.tempPhrase])
+      this.$store.dispatch(UPDATE_CONTEXT, [...this.phraseList, this.tempPhrase]);
+      // this.$store.dispatch(UPDATE_CONTEXT, [...this.phraseList, this.tempPhrase])
       this.tempPhrase = '';
     },
     deletePhrase(indexOfPhrase) {
-      this.$store.dispatch(DELETE_PHRASE, indexOfPhrase)
+      let phrases = this.phraseList
+      if (indexOfPhrase >= 0 && indexOfPhrase < phrases.length) {
+        phrases.splice(indexOfPhrase, 1)
+        this.$store.dispatch(UPDATE_CONTEXT, phrases)
+      }
+      // this.$store.dispatch(DELETE_PHRASE, indexOfPhrase)
     }
   },
 };

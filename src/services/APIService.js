@@ -48,13 +48,18 @@ export default class APIService {
     }
 
 
-    async createRoom({ roomId }) {
-      const response = await this.instance.get('/room/create', { params: { roomId } });
+    async createRoom() {
+      const response = await this.instance.get('/room/create');
       return response.data;
     }
 
     async joinRoom({ roomId }) {
       const response = await this.instance.get('/room/join', { params: { roomId } });
+      return response.data;
+    }
+
+    async endLecture({ roomId }) {
+      const response = await this.instance.delete('/room', { params: { roomId } });
       return response.data;
     }
 }

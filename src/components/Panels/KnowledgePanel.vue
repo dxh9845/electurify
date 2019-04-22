@@ -7,6 +7,7 @@
 
 <script>
 import WikiSummary from './WikiSummary.vue';
+import { GET_NLP } from '@/utils/message.types';
 
 export default {
   name: 'knowledge-panel',
@@ -15,7 +16,7 @@ export default {
   },
   methods: {
     sendNLPRequest() {
-      this.$socket.emit('get-nlp');
+      this.$socket.emit(GET_NLP, this.$store.state.transcript.lastTranscript);
     },
   },
 };

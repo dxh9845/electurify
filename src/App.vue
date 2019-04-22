@@ -5,7 +5,7 @@
     <b-navbar type="dark" variant="coral">
       <b-navbar-brand>Lecture Accessibility</b-navbar-brand>
       <b-navbar-nav class="ml-auto">
-        <RecordButton />
+        <RecordButton v-show="roomCreated"/>
       </b-navbar-nav>
     </b-navbar>
 
@@ -19,10 +19,17 @@
 
 <script>
 import RecordButton from '@/components/Common/RecordButton.vue';
+import { mapState } from 'vuex';
 
 export default {
   components: {
     RecordButton,
+  },
+  computed: {
+    ...mapState({
+      // role: state => state.role.role,
+      roomCreated: state => state.role.roomCreated,
+    }),
   },
 };
 </script>

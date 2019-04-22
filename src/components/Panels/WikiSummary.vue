@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>{{ img_alt }}</p>
     <b-card
       v-show="wiki_extract"
       v-bind:title="wiki_extract.title"
