@@ -1,30 +1,63 @@
-$coral: #D9594C;
-$maroon: #8B1E3F;
-$purple: #3C153B;
-$lightgreen: #89BD93;
+$theme_colors: (
+    coral: #D9594C,
+    maroon: #8B1E3F,
+    purple: #3C153B,
+    lg: #89BD93,
+    babypowder: #FCFCFC,
+    brinkpink: #F7567C,
+    cosmiclatte: #FFFAE3,
+    robineggblue: #99E1D9,
+    darker: #212121,
+    black: #000000
+);
 
-$babypowder: #FCFCFC;
-$brinkpink: #F7567C;
-$cosmiclatte: #FFFAE3;
-$robineggblue: #99E1D9;
+// @mixin color-generator {
+//     @each $name, $hex in $theme_colors {
+//         &-#{$name} {
+//             background-color: $hex;
+//         }
+//     }
+// }
 
-.btn-coral, .bg-coral {
-    background-color: $coral;
-}
+// @mixin bg-variant($parent, $color) {
+//   #{$parent} {
+//     background-color: $color !important;
+//   }
+//   a#{$parent},
+//   button#{$parent} {
+//     @include hover-focus {
+//       background-color: darken($color, 10%) !important;
+//     }
+//   }
+// }
 
-.btn-maroon, .bg-maroon {
-    background-color: $maroon;
+// .btn, .bg, .list-group-item {
+//     @include color-generator;
+// }
 
-}
 
-.btn-purple, .bg-purple {
-    background-color: $purple;
-}
 
-.btn-lg, .bg-lg {
-    background-color: $lightgreen;
-}
+// .btn-coral, .bg-coral {
+//     background-color: $coral;
+// }
 
-.btn-babypowder, .bg-babypowder {
-    background-color: $babypowder;
-}
+// .btn-maroon, .bg-maroon {
+//     background-color: $maroon;
+
+// }
+
+// .btn-purple, .bg-purple {
+//     background-color: $purple;
+// }
+
+// .btn-lg, .bg-lg {
+//     background-color: $lightgreen;
+// }
+
+// .btn-babypowder, .bg-babypowder {
+//     background-color: $babypowder;
+// }
+
+// .btn-brinkpink, .bg-brinkpink {
+//     background-color: $brinkpink;
+// }

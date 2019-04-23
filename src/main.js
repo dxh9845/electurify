@@ -7,8 +7,16 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import './registerServiceWorker';
+// import PDFPlugin from '../../slide-shower/dist/esm';
+import '../../slide-shower/dist/index.css';
+import ThemeMixin from './utils/theme.mixin';
 
+Vue.mixin(ThemeMixin);
 Vue.use(VueChatScroll);
+<<<<<<< HEAD
+=======
+Vue.use(PDFPlugin, { store });
+>>>>>>> test
 
 Vue.use(new VueSocketIO({
   debug: true,

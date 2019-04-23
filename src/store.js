@@ -5,6 +5,7 @@ import ContextModule from './store/context.module';
 import SocketModule from './store/socket.module';
 import RoleModule from './store/role.module';
 import TranscriptModule from './store/transcript.module';
+import ThemeModule from './store/layout.module';
 
 Vue.use(Vuex);
 
@@ -14,5 +15,6 @@ export default new Vuex.Store({
     socket: SocketModule,
     role: RoleModule,
     transcript: TranscriptModule,
+    theme: ThemeModule,
   },
 });
