@@ -13,10 +13,7 @@ import ThemeMixin from './utils/theme.mixin';
 
 Vue.mixin(ThemeMixin);
 Vue.use(VueChatScroll);
-<<<<<<< HEAD
-=======
-Vue.use(PDFPlugin, { store });
->>>>>>> test
+// Vue.use(PDFPlugin, { store });
 
 Vue.use(new VueSocketIO({
   debug: true,
