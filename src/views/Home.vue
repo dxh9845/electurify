@@ -1,8 +1,18 @@
 <template>
-  <div id="home" class='scroll-container'>
+  <b-container fluid :class="[backgroundColor]" id="home" class='scroll-container'>
     <RolePanel></RolePanel>
-    <TranscriptBox v-show="role"></TranscriptBox>
-  </div>
+    
+    <b-row>
+      <b-col>
+        <!-- <SlideContainer :variant='theme' class='height: 40vh;'></SlideContainer> -->
+      </b-col>
+
+      <b-col>
+        <TranscriptBox v-show='role' :variant='theme'></TranscriptBox>
+      </b-col>
+    </b-row>
+    
+  </b-container>
 </template>
 
 <script>
@@ -22,13 +32,22 @@ export default {
     return {
       audioService: null,
     };
+  },  
+  sockets: {
+    connect() {
+      console.log('Socket connected');
+    },
+    disconnect() {
+      console.log('Socket disconnected');
+    },
+    messages(data) {
+      console.log(data);
+    },
   },
   computed: {
     ...mapState({
       role: state => state.role.role,
     }),
-  },
-  mounted() {
   },
   sockets: {
     connect() {

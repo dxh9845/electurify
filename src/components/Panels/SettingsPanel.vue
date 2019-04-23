@@ -1,7 +1,7 @@
 <template>
     <div>
         <section>
-            <section-icon icon='microphone' variant='lg'></section-icon>
+            <section-icon icon='microphone' :variant='themeColor'></section-icon>
             <h4>Improve voice recognition </h4>
             <p>
                 Help improve voice recognition by adding words and phrases that will be discussed!
@@ -10,7 +10,17 @@
         </section>
 
         <section>
-            <section-icon icon='info' variant='lg'> </section-icon>
+            <section-icon icon='palette' :variant='themeColor'></section-icon>
+            <h4>Change theme</h4>
+            <p>Customize Lecture Slides to your liking! Choose your favorite color below.</p>
+            <small>Theme:</small>
+            <theme-picker></theme-picker>
+            <small>Color:</small>
+            <color-picker></color-picker>
+        </section>
+
+        <section>
+            <section-icon icon='info' :variant='themeColor'> </section-icon>
             <h4>About</h4>
             <p>HannibalLecture was written by Daniel Herzig and Regina Wang, © 2019.</p>
         </section>
@@ -19,11 +29,15 @@
 
 <script>
 import SectionIcon from '@/components/Common/SectionIcon.vue';
+import ThemePicker from '@/components/Common/ThemePicker.vue';
+import ColorPicker from '@/components/Common/ColorPicker.vue';
 
 export default {
   name: 'settings-panel',
   components: {
     SectionIcon,
+    ColorPicker,
+    ThemePicker
   },
 };
 </script>

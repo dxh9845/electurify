@@ -1,25 +1,27 @@
 <template>
-    <b-container fluid>
+    <div>
         <b-row>
             <b-col>
-                <ul class='transcript-container mb-0' :class='{ animated : connected, stopped: !connected }' v-chat-scroll>
+                <ul class='transcript-container mb-0' 
+                  :class='[transcriptTheme.text, transcriptTheme.background, { animated : connected, stopped: !connected }]' 
+                  v-chat-scroll>
                     <li class='transcript' v-for="message in finalText">{{ message }}</li>
                 </ul>
             </b-col>
         </b-row>
         <b-row>
             <b-col>
-                <div class='w-100 bg-dark text-white transcript'>
+                <div class='w-100 text-white transcript' :class="[transcriptTheme.textChange]">
                     <span class='ml-3'> > </span>
                     {{ interimText }}
                 </div>
             </b-col>
         </b-row>
-        <b-row>{{ connected }}</b-row>
-    </b-container>
+    </div>
 </template>
 
 <script>
+import { DARK_THEME, LIGHT_THEME } from '../../utils/view.types.js' 
 import { mapState } from 'vuex';
 import {SET_LAST_TRANSCRIPT} from '@/store/mutations.type'
 
@@ -46,6 +48,20 @@ export default {
     };
   },
   computed: {
+    transcriptTheme: function() {
+      let retVal = {};
+      switch (this.theme) {
+        case DARK_THEME:
+          retVal = Object.assign(retVal, { text: 'text-white', background: 'bg-darker', textChange: 'bg-black' })
+          break;
+        case LIGHT_THEME:
+        default:
+          retVal = Object.assign(retVal, { text: 'text-black', background: '', textChange: 'bg-dark' })
+          break;
+      }
+      return retVal;
+      
+    },
     ...mapState({ connected: state => state.socket.connected }),
   },
 };
@@ -56,12 +72,12 @@ export default {
     overflow-x: auto;
     height: 350px;
     border: 2px solid transparent;
-    background-image:
-        linear-gradient(white, white),
-        linear-gradient(270deg, #00D7B9, #B95DD7 50%, #FFB367 100%);
+    // background-image:
+    //     // linear-gradient(white, white),
+    //     linear-gradient(270deg, #00D7B9, #B95DD7 50%, #FFB367 100%);
 
-      background-repeat: no-repeat;
-      background-origin: padding-box, border-box;
+    background-repeat: no-repeat;
+    background-origin: padding-box, border-box;
     list-style-type: none;
 }
 
@@ -75,9 +91,9 @@ export default {
 }
 
 .animated {
-    background-image:
-      linear-gradient(white, white),
-      linear-gradient(180deg, cornflowerblue, purple 50%, cornflowerblue);
+    // background-image:
+    //   // linear-gradient(white, white),
+    //   linear-gradient(180deg, cornflowerblue, purple 50%, cornflowerblue);
 
     background-repeat: no-repeat;
     background-size: 100% 100%, 100% 200%;
