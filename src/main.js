@@ -3,16 +3,17 @@ import './plugins/font-awesome';
 import './plugins/bootstrap-vue';
 import VueChatScroll from 'vue-chat-scroll';
 import VueSocketIO from 'vue-socket.io';
-// import Socket from 'socket.io-client';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import './registerServiceWorker';
+// import PDFPlugin from '../../slide-shower/dist/esm';
+import '../../slide-shower/dist/index.css';
+import ThemeMixin from './utils/theme.mixin';
 
+Vue.mixin(ThemeMixin);
 Vue.use(VueChatScroll);
-
-// Vue.prototype.$teacherSocket = new Socket('http://localhost:8081/teacher');
-// Vue.prototype.$studentSocket = new Socket('http://localhost:8081/student');
+Vue.use(PDFPlugin, { store });
 
 Vue.use(new VueSocketIO({
   debug: true,
