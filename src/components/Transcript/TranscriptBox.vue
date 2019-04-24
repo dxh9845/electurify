@@ -2,8 +2,8 @@
     <div>
         <b-row>
             <b-col>
-                <ul class='transcript-container mb-0' 
-                  :class='[transcriptTheme.text, transcriptTheme.background, { animated : connected, stopped: !connected }]' 
+                <ul class='transcript-container mb-0'
+                  :class='[transcriptTheme.text, transcriptTheme.background, { animated : connected, stopped: !connected }]'
                   v-chat-scroll>
                     <li class='transcript' v-for="message in finalText">{{ message }}</li>
                 </ul>
@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import { DARK_THEME, LIGHT_THEME } from '../../utils/view.types.js' 
+import { DARK_THEME, LIGHT_THEME } from '../../utils/view.types.js';
 import { mapState } from 'vuex';
-import {SET_LAST_TRANSCRIPT} from '@/store/mutations.type'
+import { SET_LAST_TRANSCRIPT } from '@/store/mutations.type';
 
 export default {
   name: 'transcript-box',
@@ -48,19 +48,18 @@ export default {
     };
   },
   computed: {
-    transcriptTheme: function() {
+    transcriptTheme() {
       let retVal = {};
       switch (this.theme) {
         case DARK_THEME:
-          retVal = Object.assign(retVal, { text: 'text-white', background: 'bg-darker', textChange: 'bg-black' })
+          retVal = Object.assign(retVal, { text: 'text-white', background: 'bg-darker', textChange: 'bg-black' });
           break;
         case LIGHT_THEME:
         default:
-          retVal = Object.assign(retVal, { text: 'text-black', background: '', textChange: 'bg-dark' })
+          retVal = Object.assign(retVal, { text: 'text-black', background: '', textChange: 'bg-dark' });
           break;
       }
       return retVal;
-      
     },
     ...mapState({ connected: state => state.socket.connected }),
   },

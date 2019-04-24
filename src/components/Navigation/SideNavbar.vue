@@ -7,7 +7,8 @@
                     @click="toggle(false)"
                     role='button' title='Knowledge panel'
                     v-b-tooltip.hover.left="'Knowledge panel'"
-                    to="/knowledge" class='rounded-0'
+                    to="knowledge" class='rounded-0'
+                    append
                     :class="[classutils.center]" tag="button"
                     aria-label='Activate knowledge panel'>
                     <fa-icon icon='brain'></fa-icon>
@@ -18,7 +19,8 @@
                 <b-list-group-item
                     :variant='themeColor'
                     @click="toggle(false)"
-                    to="/settings" class='rounded-0'
+                    to="settings" class='rounded-0'
+                    append
                     role='button' title='Settings panel'
                     v-b-tooltip.hover.left="'Settings panel'"
                     :class="[classutils.center]" tag="button"
@@ -55,8 +57,8 @@ export default {
   },
   computed: {
     /**
-         * Determine the direction of the arrow icon
-         */
+     * Determine the direction of the arrow icon
+     */
     iconDirection() {
       return this.collapsed ? 'horizontal' : null;
     },

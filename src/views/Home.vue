@@ -1,17 +1,17 @@
 <template>
-  <b-container fluid :class="[backgroundColor]" id="home" class='scroll-container'>
+  <b-container fluid id="home" class='scroll-container'>
     <RolePanel></RolePanel>
-    
+
     <b-row>
       <b-col>
-        <!-- <SlideContainer :variant='theme' class='height: 40vh;'></SlideContainer> -->
+        <SlideContainer :variant='theme' style='height: 398px;'></SlideContainer>
       </b-col>
 
       <b-col>
         <TranscriptBox v-show='role' :variant='theme'></TranscriptBox>
       </b-col>
     </b-row>
-    
+
   </b-container>
 </template>
 
@@ -19,11 +19,18 @@
 import TranscriptBox from '@/components/Transcript/TranscriptBox.vue';
 // import APIService from '@/services/APIService.js';
 // import Socket from 'socket.io-client';
-import RolePanel from '@/components/RolePanel.vue'
+import RolePanel from '@/components/RolePanel.vue';
+import { SET_ROLE } from '@/store/mutations.type.js';
 import { mapState } from 'vuex';
 
 export default {
   name: 'home',
+  props: {
+    roleProp: {
+      type: String,
+      required: true,
+    }
+  },
   components: {
     RolePanel,
     TranscriptBox,
@@ -32,22 +39,9 @@ export default {
     return {
       audioService: null,
     };
-  },  
-  sockets: {
-    connect() {
-      console.log('Socket connected');
-    },
-    disconnect() {
-      console.log('Socket disconnected');
-    },
-    messages(data) {
-      console.log(data);
-    },
   },
-  computed: {
-    ...mapState({
-      role: state => state.role.role,
-    }),
+  created() {
+    this.$store.commit(SET_ROLE, this.$props.roleProp);
   },
   sockets: {
     connect() {

@@ -63,13 +63,13 @@ export default {
       this.tempPhrase = '';
     },
     deletePhrase(indexOfPhrase) {
-      let phrases = this.phraseList
+      const phrases = this.phraseList;
       if (indexOfPhrase >= 0 && indexOfPhrase < phrases.length) {
-        phrases.splice(indexOfPhrase, 1)
-        this.$store.dispatch(UPDATE_CONTEXT, phrases)
+        phrases.splice(indexOfPhrase, 1);
+        this.$store.dispatch(UPDATE_CONTEXT, phrases);
       }
       // this.$store.dispatch(DELETE_PHRASE, indexOfPhrase)
-    }
+    },
   },
 };
 </script>

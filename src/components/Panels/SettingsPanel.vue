@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section>
+        <section v-if="role === 'teacher'"> 
             <section-icon icon='microphone' :variant='themeColor'></section-icon>
             <h4>Improve voice recognition </h4>
             <p>
@@ -37,7 +37,7 @@ export default {
   components: {
     SectionIcon,
     ColorPicker,
-    ThemePicker
+    ThemePicker,
   },
 };
 </script>

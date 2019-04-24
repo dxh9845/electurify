@@ -1,21 +1,10 @@
 <template>
   <div>
-    <div id ="role-selection" style="text-align:center" v-show="!role">
-      <h1>I am a:</h1>
-      <b-row>
-        <b-col>
-          <b-button size="lg" @click="setRole('teacher')">Teacher</b-button>
-        </b-col>
-        <b-col>
-          <b-button size="lg" @click="setRole('student')">Student</b-button>
-        </b-col>
-      </b-row>
-    </div>
     <div id="teacher" class='fixed ml-3' v-show="role=='teacher'">
           <b-button class='mb-1' v-show='!roomJoined' size='md' @click="createLectureRoom">Create new lecture</b-button>
           <b-row v-show='roomJoined'>
             <b-col>
-              <p class="pt-2">{{ joinStatus }}</p>
+              <p class="pt-2" :class="[textColor]">{{ joinStatus }}</p>
             </b-col>
             <b-col>
               <b-btn size='sm' v-show='!lectureEnded' @click='endLecture'>End lecture</b-btn>
@@ -27,6 +16,7 @@
         v-show="!roomJoined"
         label-cols-sm='4'
         label-cols-lg='3'
+        :class=[textColor]
         label='Enter your lecture code'
         label-for='room-input'>
         <b-input-group class='col col-lg-4 col-sm-6'>
@@ -36,7 +26,7 @@
           </b-input-group-append>
         </b-input-group>
       </b-form-group>
-      <p class="pt-2" v-show="roomJoined">{{ joinStatus }}</p>
+      <p class="pt-2" :class="[textColor]" v-show="roomJoined">{{ joinStatus }}</p>
       <b-btn size='sm' v-show='roomJoined' @click='endLecture'>End lecture</b-btn>
     </div>
   </div>
@@ -44,30 +34,24 @@
 
 <script>
 import { SET_ROLE, SET_ROOM_CREATED } from '@/store/mutations.type.js';
-import { NEW_LECTURE, JOIN_LECTURE, END_LECTURE} from '@/utils/message.types.js';
-import { mapState } from 'vuex';
+import { NEW_LECTURE, JOIN_LECTURE, END_LECTURE } from '@/utils/message.types.js';
 import APIService from '@/services/APIService.js';
 
 export default {
   name: 'role-panel',
+
   data() {
     return {
       lectureCode: '',
       joinStatus: '',
       roomJoined: false,
-      role: '',
       lectureEnded: false,
     };
-  },
-  computed: {
-    // ...mapState({
-    //   role: state => state.role.role,
-    // }),
   },
   sockets: {
     roomId(id) {
       this.lectureCode = id;
-      this.joinStatus = `Joined lecture ${this.lectureCode}.`
+      this.joinStatus = `Joined lecture ${this.lectureCode}.`;
     },
   },
   methods: {
@@ -89,7 +73,7 @@ export default {
       this.$socket.emit(END_LECTURE, this.lectureCode);
       this.joinStatus = 'Lecture ended';
       thislectureEnded = true;
-    }
+    },
   },
 };
 </script>

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import Role from './views/Roles.vue';
 import SideNavbar from './components/Navigation/SideNavbar.vue';
 import SidebarPanel from './components/Navigation/SidebarPanel.vue';
 
@@ -12,9 +13,17 @@ export default new Router({
       path: '/',
       name: 'home',
       components: {
+        default: Role,
+      },
+    },
+    {
+      path: '/roles/:roleProp/',
+      name: 'roles',
+      components: {
         default: Home,
         sidebar: SideNavbar,
       },
+      props: { default: true, sidebar: false },
       children: [
         {
           path: 'knowledge',
@@ -41,6 +50,7 @@ export default new Router({
           component: SidebarPanel,
         },
       ],
+
     },
   ],
 });

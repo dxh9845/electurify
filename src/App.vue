@@ -9,7 +9,7 @@
       </b-navbar-nav>
     </b-navbar>
 
-    <main class='d-flex overflow-hidden h-100'>
+    <main class='d-flex overflow-hidden h-100' :class='[backgroundColor]'>
       <router-view class='p-4 content-column' />
       <router-view name='sidebar' />
     </main>
