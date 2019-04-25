@@ -21,3 +21,6 @@ export const COLORS = [
   { text: 'Pink', color: PINK, textvariant: 'black' },
   { text: 'Blue', color: BLUE, textvariant: 'white' },
 ];
+
+// Fonts
+export const OPEN_DYSLEXIC = 'opendyslexic';

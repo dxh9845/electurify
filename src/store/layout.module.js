@@ -1,4 +1,6 @@
-import { CHANGE_LAYOUT, CHANGE_COLOR, CHANGE_THEME } from './actions.type';
+import {
+  CHANGE_LAYOUT, CHANGE_COLOR, CHANGE_THEME, CHANGE_FONT,
+} from './actions.type';
 import {
   STACKED, CORAL, MAROON, LIGHT_THEME, DARK_THEME,
 } from '../utils/view.types';
@@ -7,6 +9,7 @@ const state = {
   layout: STACKED,
   theme: LIGHT_THEME,
   color: MAROON,
+  font: '',
 };
 
 const getters = {
@@ -22,6 +25,9 @@ const getters = {
   textColor() {
     return state.theme === DARK_THEME ? 'text-white' : 'text-black';
   },
+  fontClass() {
+    return state.font;
+  },
 };
 
 const actions = {
@@ -34,6 +40,9 @@ const actions = {
   [CHANGE_COLOR]({ commit }, color) {
     commit(CHANGE_COLOR, color);
   },
+  [CHANGE_FONT]({ commit }, font) {
+    commit(CHANGE_FONT, font);
+  },
 };
 
 const mutations = {
@@ -45,6 +54,9 @@ const mutations = {
   },
   [CHANGE_COLOR](state, newColor) {
     state.color = newColor;
+  },
+  [CHANGE_FONT](state, font) {
+    state.font = font;
   },
 };
 

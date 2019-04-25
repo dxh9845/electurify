@@ -11,3 +11,4 @@ export const DELETE_PHRASE = 'DELETE_PHRASE';
 export const CHANGE_THEME = 'CHANGE_THEME';
 export const CHANGE_LAYOUT = 'CHANGE_LAYOUT';
 export const CHANGE_COLOR = 'CHANGE_COLOR';
+export const CHANGE_FONT = 'CHANGE_FONT';
