@@ -2,7 +2,8 @@
     <nav id='sidebar' class='h-100'>
         <div id='icon-bar' class='d-inline-flex flex-column justify-content-between h-100' :class="[backgroundColor]" >
             <b-list-group>
-                <b-list-group-item
+                <b-list-group-item 
+                    v-if="role === 'student'"
                     :variant='themeColor'
                     @click="toggle(false, 'knowledge')"
                     button title='Knowledge panel'
@@ -77,11 +78,12 @@ export default {
       if (isCollapseButton) {
         this.collapsed = !this.collapsed;
       }
-      // If this button is collapsed, expand it
-      else if (this.collapsed) {
-        this.collapsed = false;
-      } 
-      this.$router.push({ path: route })
+      else {
+        if (this.collapsed) {
+          this.collapsed = false;
+        }
+        this.$router.push({ path: route })
+      }
     },
   },
 

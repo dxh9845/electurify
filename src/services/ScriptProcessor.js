@@ -25,7 +25,7 @@ export default class ScriptProcessor {
    * @param {*} bufferSize - the size of the Audio Buffer for the Script Processor node. Defaults to 2048
    * @param {*} socketService - A reference to the Socket.IO client instance.
    */
-  constructor(socketService, bufferSize = 2048) {
+  constructor(socketService, bufferSize = 4096) {
     this.bufferSize = bufferSize;
     this.buffArray = [];
 
@@ -136,14 +136,21 @@ export default class ScriptProcessor {
    */
   sendAudio({ inputBuffer, outputBuffer }) {
     const inputData = inputBuffer.getChannelData(0);
+    // console.log(inputData);
 
-    // for (let b = inputData.length, d = new Int16Array(b); b--;) {
-    //   d[b] = 32767 * Math.min(1, inputData[b]);
+    const d = new Int16Array(inputData.length);
+
+    for (let b = inputData.length; b--;) {
+      d[b] = 32767 * Math.min(1, inputData[b]);
+    }
+
+    // for (let b = inputData.length; b > 0; b--) {
+    //   outputBuffer[b] = 32767 * Math.min(1, inputData[b]);
     // }
 
-    const downsampledBuffer = this.downsampleBuffer(inputData, 44100, 16000);
+    // const downsampledBuffer = this.downsampleBuffer(inputData, 44100, 16000);
 
-    this.socketService.emit(AUDIO_DATA, downsampledBuffer);
+    this.socketService.emit(AUDIO_DATA, d.buffer);
   }
 
   // eslint-disable-next-line class-methods-use-this

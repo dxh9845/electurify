@@ -28,7 +28,7 @@ export default {
     };
   },
   sockets: {
-    topicSend: function (topic) {
+    topicSend(topic) {
       if (topic) {
         this.getSummary(topic);
         console.log(`Topic: ${topic}`);

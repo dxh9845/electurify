@@ -14,7 +14,6 @@
 
 <script>
 import { CHANGE_THEME } from '@/store/actions.type';
-import { mapState } from 'vuex';
 
 export default {
   name: 'theme-picker',

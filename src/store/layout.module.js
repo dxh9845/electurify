@@ -32,7 +32,6 @@ const actions = {
     commit(CHANGE_LAYOUT, layout);
   },
   [CHANGE_COLOR]({ commit }, color) {
-    console.log(color);
     commit(CHANGE_COLOR, color);
   },
 };

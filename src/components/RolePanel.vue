@@ -51,7 +51,7 @@ export default {
   sockets: {
     roomId(id) {
       this.lectureCode = id;
-      this.joinStatus = `Joined lecture ${this.lectureCode}.`;
+      this.joinStatus = `Created lecture ${this.lectureCode}.`;
     },
   },
   methods: {
