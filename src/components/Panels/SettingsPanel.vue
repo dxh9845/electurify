@@ -12,7 +12,7 @@
         <section>
             <section-icon icon='palette' :variant='themeColor'></section-icon>
             <h4>Change theme</h4>
-            <p>Customize Lecture Slides to your liking! Choose your favorite color below.</p>
+            <p>Customize ALT to your liking! Choose your favorite color below.</p>
             <small>Theme:</small>
             <theme-picker></theme-picker>
             <small>Color:</small>
@@ -22,7 +22,7 @@
         <section>
             <section-icon icon='info' :variant='themeColor'> </section-icon>
             <h4>About</h4>
-            <p>HannibalLecture was written by Daniel Herzig and Regina Wang, © 2019.</p>
+            <p> <em>ALT: The Accessible Lecture Tool</em>   was written by Daniel Herzig and Regina Wang, © 2019.</p>
         </section>
     </div>
 </template>
