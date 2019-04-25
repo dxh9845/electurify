@@ -3,7 +3,7 @@
 
     <!-- Take up a small amount of space at the top -->
     <b-navbar type="dark" :variant="themeColor">
-      <b-navbar-brand>Lecture Accessibility</b-navbar-brand>
+      <b-navbar-brand :to="{ name: 'roles' }">Lecture Accessibility</b-navbar-brand>
       <b-navbar-nav class="ml-auto">
         <RecordButton v-show="roomCreated"/>
       </b-navbar-nav>
@@ -27,7 +27,6 @@ export default {
   },
   computed: {
     ...mapState({
-      // role: state => state.role.role,
       roomCreated: state => state.role.roomCreated,
     }),
   },

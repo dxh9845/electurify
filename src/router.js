@@ -1,29 +1,27 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
-import Role from './views/Roles.vue';
-import SideNavbar from './components/Navigation/SideNavbar.vue';
+import HomeView from './views/Home.vue';
+import RolesView from './views/Roles.vue';
 import SidebarPanel from './components/Navigation/SidebarPanel.vue';
+import SideNavbar from './components/Navigation/SideNavbar.vue';
+import Error from './views/Error.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const routes = new Router({
   routes: [
+    {
+      path: '/roles',
+      name: 'roles',
+      component: RolesView,
+    },
     {
       path: '/',
       name: 'home',
       components: {
-        default: Role,
-      },
-    },
-    {
-      path: '/roles/:roleProp/',
-      name: 'roles',
-      components: {
-        default: Home,
+        default: HomeView,
         sidebar: SideNavbar,
       },
-      props: { default: true, sidebar: false },
       children: [
         {
           path: 'knowledge',
@@ -50,7 +48,16 @@ export default new Router({
           component: SidebarPanel,
         },
       ],
-
     },
   ],
 });
+
+routes.beforeEach((to, from, next) => {
+  if (to.matched.length === 0) {
+    next({ path: '/roles' });
+  } else {
+    next();
+  }
+});
+
+export default routes;

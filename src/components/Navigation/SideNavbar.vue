@@ -4,12 +4,11 @@
             <b-list-group>
                 <b-list-group-item
                     :variant='themeColor'
-                    @click="toggle(false)"
-                    role='button' title='Knowledge panel'
+                    @click="toggle(false, 'knowledge')"
+                    button title='Knowledge panel'
                     v-b-tooltip.hover.left="'Knowledge panel'"
-                    to="knowledge" class='rounded-0'
-                    append
-                    :class="[classutils.center]" tag="button"
+                    role='button'
+                    :class="[...classutils]"
                     aria-label='Activate knowledge panel'>
                     <fa-icon icon='brain'></fa-icon>
                 </b-list-group-item>
@@ -18,20 +17,18 @@
             <b-list-group>
                 <b-list-group-item
                     :variant='themeColor'
-                    @click="toggle(false)"
-                    to="settings" class='rounded-0'
-                    append
-                    role='button' title='Settings panel'
+                    @click="toggle(false, 'settings')"
+                    button title='Settings panel'
                     v-b-tooltip.hover.left="'Settings panel'"
-                    :class="[classutils.center]" tag="button"
+                    :class="[...classutils]"  role='button'
                     aria-label='Activate settings panel'>
                     <fa-icon icon='cog'></fa-icon>
                 </b-list-group-item>
                 <b-list-group-item
                   :variant='themeColor'
-                    @click="toggle(true)" class='rounded-0'
-                    role='button' title='Collapse sidebar'
-                    :class="[classutils.center]" tag="button"
+                    @click="toggle(true, $event)" 
+                    button title='Collapse sidebar'
+                    :class="[...classutils]" role='button'
                     aria-label='Collapse sidebar'>
                     <fa-icon :flip="iconDirection" icon='angle-double-right'></fa-icon>
                 </b-list-group-item>
@@ -50,9 +47,10 @@ export default {
   data() {
     return {
       collapsed: true,
-      classutils: {
-        center: 'd-flex justify-content-center align-items-center',
-      },
+      classutils: [
+        'd-flex justify-content-center align-items-center',
+        'rounded-0'
+      ]
     };
   },
   computed: {
@@ -74,7 +72,7 @@ export default {
      * Toggle the navigation pane.
      * @param isCollapseButton {Boolean} - Whether the button clicked was the collapse button.
      */
-    toggle(isCollapseButton) {
+    toggle(isCollapseButton, route) {
       // If the button is the "collapse button", invert whatever value it has
       if (isCollapseButton) {
         this.collapsed = !this.collapsed;
@@ -82,7 +80,8 @@ export default {
       // If this button is collapsed, expand it
       else if (this.collapsed) {
         this.collapsed = false;
-      }
+      } 
+      this.$router.push({ path: route })
     },
   },
 

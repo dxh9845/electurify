@@ -15,7 +15,9 @@
                     :body-class="['p-0', backgroundColor]"
                     img-alt="A picture of a musical teacher talking to her class."
                     img-fluid>
-                    <b-button block :variant='themeColor' :to="{ name: 'roles', params: { roleProp: 'teacher' }}" class='rounded-0'>Click here to start.</b-button>
+                    <b-button block :variant='themeColor' @click="changeRole('teacher')" class='rounded-0'>
+                        Click here to start.
+                    </b-button>
                 </b-card>
             </b-col>
             <b-col>
@@ -26,7 +28,9 @@
                     :body-class="['p-0', backgroundColor]"
                     img-alt="A picture of a young, humble student studying."
                     :img-src='StudentImage' img-fluid>
-                    <b-button block :variant='themeColor' :to="{ name: 'roles', params: { roleProp: 'student' }}" class='rounded-0'>Click here to join.</b-button>
+                    <b-button block :variant='themeColor' @click="changeRole('student')" class='rounded-0'>
+                        Click here to join.
+                    </b-button>
                 </b-card>
             </b-col>
         </b-row>
@@ -36,12 +40,20 @@
 <script>
 import TeacherImage from '@/assets/teacher2.jpg';
 import StudentImage from '@/assets/student2.jpg';
+import { SET_ROLE } from '@/store/mutations.type.js';
+
 export default {
     name: 'roles',
     data() {
         return {
             TeacherImage: TeacherImage,
             StudentImage: StudentImage
+        }
+    },
+    methods: {
+        changeRole(role) {
+            this.$store.commit(SET_ROLE, role);
+            this.$router.push({ name: 'home' });
         }
     }
 }
