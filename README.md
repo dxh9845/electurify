@@ -1,4 +1,8 @@
-# hannibal-lecture
+# Elecutrify
+
+Making lectures more accessible through intelligent voice recognition and assistive technology.
+
+![Electurify example](example.png)
 
 ## Project setup
 ```
